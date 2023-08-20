@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import HomeScreen from './HomeScreen';
+import HomeScreen from './src/components/Dashboard';
 function App(): JSX.Element {
   return <HomeScreen />;
 }
