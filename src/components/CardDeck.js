@@ -4,7 +4,10 @@ import {Pagination} from 'react-native-snap-carousel';
 import CardCarousel from './CardCarousel';
 
 const CardView = ({cardData, activeIndex, onSnapToItem}) => {
-  const {entries, activeSlide} = this.state || {entries: [1, 2, 3]};
+  const {entries, activeSlide} = this.state || {
+    entries: [1, 2, 3],
+    activeSlide: 2,
+  };
 
   return (
     <View style={styles.container}>

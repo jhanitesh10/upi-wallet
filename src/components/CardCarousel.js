@@ -36,6 +36,7 @@ const ENTRIES1 = [
     illustration: 'https://i.imgur.com/2nCt3Sbl.jpg',
   },
 ];
+
 const {width: screenWidth} = Dimensions.get('window');
 
 const CardCarousel = props => {
