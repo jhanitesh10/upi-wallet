@@ -1,59 +1,56 @@
-// CardDeck.js
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import SwipeCards from 'react-native-swipe-cards';
-import SwipeCard from './SwipeCard';
+import {Pagination} from 'react-native-snap-carousel';
+import CardCarousel from './CardCarousel';
 
-const CardDeck = ({data, onSwipeLeft, onSwipeRight}) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [cards, setCards] = useState(data);
-
-  const handleYup = () => {
-    // Handle right swipe
-    const nextIndex = (currentIndex + 1) % data.length;
-    setCurrentIndex(nextIndex);
-    onSwipeRight();
-  };
-
-  const handleNope = () => {
-    // Handle left swipe
-    const nextIndex = (currentIndex + 1) % data.length;
-    setCurrentIndex(nextIndex);
-    onSwipeLeft();
-  };
-
-  useEffect(() => {
-    // Create a new array with cards in the desired order
-    const reorderedCards = [
-      ...data.slice(currentIndex),
-      ...data.slice(0, currentIndex),
-    ];
-    setCards(reorderedCards);
-  }, [currentIndex, data]);
+const CardView = ({cardData, activeIndex, onSnapToItem}) => {
+  const {entries, activeSlide} = this.state || {entries: [1, 2, 3]};
 
   return (
-    <View style={styles.cardDeckContainer}>
-      <SwipeCards
-        cards={cards}
-        renderCard={cardData => <SwipeCard item={cardData} />}
-        handleYup={handleYup}
-        handleNope={handleNope}
-        stack={false} // Disable stacking effect
-        loop={false} // Disable loop effect
-        stackOffsetX={0} // Adjust as needed
-        stackOffsetY={0} // Adjust as needed
-        cardRemoved={() => {
-          // Handle card removal (end of the card stack)
+    <View style={styles.container}>
+      <CardCarousel />
+      <Pagination
+        dotsLength={entries.length}
+        activeDotIndex={activeSlide}
+        containerStyle={{backgroundColor: 'rgba(0, 0, 0, 0.75)'}}
+        dotStyle={{
+          width: 10,
+          height: 10,
+          borderRadius: 5,
+          marginHorizontal: 8,
+          backgroundColor: 'rgba(255, 255, 255, 0.92)',
         }}
+        inactiveDotStyle={
+          {
+            // Define styles for inactive dots here
+          }
+        }
+        inactiveDotOpacity={0.4}
+        inactiveDotS
       />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  cardDeckContainer: {
+  container: {
     flex: 1,
+  },
+  paginationContainer: {
+    position: 'absolute',
+    bottom: 10,
+    alignSelf: 'center',
+  },
+  paginationDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginHorizontal: 8,
+    backgroundColor: 'rgba(255, 255, 255, 0.92)',
+  },
+  paginationInactiveDot: {
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
   },
 });
 
-export default CardDeck;
+export default CardView;
